@@ -1,6 +1,6 @@
 # Table of contents
 
-* [README](README.md)
+* [Today I Learned](README.md)
 * [SCALA](scala/README.md)
   * [SCALA101](scala/scala101/README.md)
     * [데이터로 작업하기: 리터럴, 값, 변수, 타입](scala/scala101/01_working_with_data.md)
