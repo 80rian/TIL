@@ -1,6 +1,8 @@
 # 표현식과 조건문
-**표현식(expression)** 은 실행 후 반환하는 코드 단위를 말한다. 한 줄 이상의 코드를 중괄호로 묶으면 하나의 표현식으로 간주하며, 이를 **표현식 블록(expression block)** 이라고 한다.  
-표현식은 기존 데이터를 변경하는 대신 값을 반환할 수 있기 때문에 함수형 프로그래밍의 기반이 된다.
+> **표현식(expression)** 은 실행 후 반환하는 코드 단위를 말한다. 한 줄 이상의 코드를 중괄호로 묶으면 하나의 표현식으로 간주하며, 이를 **표현식 블록(expression block)** 이라고 한다.  
+> 표현식은 기존 데이터를 변경하는 대신 값을 반환할 수 있기 때문에 함수형 프로그래밍의 기반이 된다.
+
+<br>
 
 ## Expression
 ### 표현식으로 값과 변수 정의하기
@@ -8,6 +10,8 @@
 val <identifier> [: <type>] = <expression>
 var <identifier> [: <type>] = <expression>
 ```
+
+<br>
 
 ### Expression Block
 여러 표현식을 중괄호를 사용하여 하나로 묶어 단일 **표현식 블록(expression block)** 을 만들 수 있다. 표현식은 자신만의 **범위(scope)** 를 가지며, 해당 표현식 블록에 국한된 값과 변수를 포함한다. 그 블록의 마지막 표현식이 전체 블록의 반환값이 된다.
@@ -21,6 +25,8 @@ val amount: Int = 110
 
 표현식 블록은 중첩이 가능하며, 표현식 블록의 각 레벨은 자신만의 고유 범위의 값과 변수를 가진다.
 
+<br>
+
 ### Statement
 **문장(statement)** 은 값을 반환하지 않는 표현식이다. 문장의 반환 타입은 값이 없음을 나타내는 `Unit`이다. 스칼라에서 보편적으로 사용되는 문장들에는 `println()` 호출과 값/변수 정의가 포함된다.
 ```scala
@@ -29,6 +35,8 @@ val x: Int = 1
 ```
 
 **문장 블록(statement block)** 은 표현식 블록과는 다르게 값을 반환하지 않는다. 문장 블록은 결과값이 없어서 보편적으로 기존 데이터를 수정하거나 그 어플리케이션 범위 밖을 변경하는 데 쓰인다.
+
+<br>
 
 ## If/Else
 ### If
@@ -39,6 +47,8 @@ if (<Boolean expression>) <expression>
 scala> if ( 47 % 3 > 0 ) println("Not a multiple of 3")
 Not a multiple of 3
 ```
+
+<br>
 
 ### If-Else
 ```scala
@@ -56,6 +66,8 @@ val max: Int = 20
 모든 것이 한 줄에 맞는다면 `if/else` 표현식에서 표현식 블록 없이 단일 표현식을 사용하는 것이 좋다. 하지만 `if/else` 표현식이 한 줄에 쉽게 맞아떨어지지 않는다면, 코드의 가독성을 위해서 표현식 블록 사용을 고려해야 한다. `else`가 없는 `if` 표현식은 언제나 중괄호를 사용해야 하는데, 이는 부작용을 일으키는 문장이 되는 경향이 있기 때문이다.
 
 `if/else` 블록은 조건부 로직을 작성하는 보편적인 방식이지만 스칼라에서는 매치 **표현식(match expression)** 을 사용할 수 있다.
+
+<br>
 
 ## Match Expression
 ### 매치 표현식(match expression)
@@ -101,6 +113,8 @@ val message: String = error
 `case` 블록 내부에 둘 수 있는 문장과 표현식 개수의 제약은 없지만, 마지막 표현식만 매치 표현식의 반환값으로 사용된다.  
 여러 패턴을 하나로 결합하여 그 패턴 중 하나라도 일치하면 `case` 블록이 실행되는 **패턴 대안(pattern alternative)** 으로 만들 수 있다.
 
+<br>
+
 ### Pattern Alternative
 ```scala
 case <pattern 1> | <pattern 2> .. => <one or more expression>
@@ -127,6 +141,8 @@ scala.MatchError: match me (of class java.lang.String)
   ... 32 elided
 ```
 매치 표현식을 방해하는 에러를 예방하려면 **wildcard match-all** 패턴을 사용하거나, 모든 가능한 입력 패턴을 포괄할 수 있을 만큼 충분한 패턴을 추가해야 한다.
+
+<br>
 
 ### Wildcard Matching
 와일드카드 패턴에는 값 바인딩(value binding)과 와일드카드 연산자가 있다.  
@@ -168,6 +184,8 @@ val status: Int = -1
 ```
 이 경우 밑줄 연산자는 매치 표현식으 ㅣ실행시간 입력값을 매칭한다. 하지만 `case` 블록 내에서는 바인딩된 값처럼 접근할 수 없으므로 `println` 문장을 생성할 때는 매치 표현식의 입력값을 사용한다.
 
+<br>
+
 ### Pattern Guard
 **패턴 가드(pattern guard)** 는 값 바인딩 패턴에 `if` 표현식을 추가하여 match 표현식에 조건부 로직을 섞어 쓸 수 있게 한다. 패턴 가드를 사용하면 그 패턴은 `if` 표현식이 `true`를 반환할 때에만 매칭된다.
 ```scala
@@ -184,6 +202,8 @@ scala> response match {
      | }
 Error! Received a null response
 ```
+
+<br>
 
 ### 패턴 변수를 이용한 타입 매칭
 입력 표현식의 타입을 매칭하여 패턴 매칭을 할 수도 있다. 매칭된다면 **패턴 변수(pattern variable)** 는 입력값을 다른 타입의 값으로 전환할 수 있다. 새로운 값과 타입은 `case`블록에서 사용할 수 있다.
@@ -208,6 +228,8 @@ scala> y match {
 val res3: String = 12180i
 ```
 매치 표현식에 주어진 값이 `Any` 타입을 가지더라도 그 값이 가지고 있는 데이터가 `Int`로 생성되었다. 매치 표현식은 그 값에 주어진 타입 뿐 아니라 그 값의 실제 타입을 기반으로 매칭할 수 있다.
+
+<br>
 
 ## Loop
 **루프(loop)** 는 하나의 작업을 반복적으로 수행하는 것을 나타내는 용어로, 일정 범위의 데이터를 반복하거나 조건이 `false`를 반환할 때까지 반복한다.  
@@ -243,6 +265,8 @@ scala> for (day <- dayList) print(day + ", ")
 Day 1:, Day 2:, Day 3:, Day 4:, Day 5:, Day 6:, Day 7:, 
 ```
 
+<br>
+
 ### Itrator Guard
 매치 표현식에서의 패턴 가드와 마찬가지로, **반복자 가드(iterator guard)** 또는 **필터(filter)** 는 반복자에 `if` 표현식을 추가한다.
 ```scala
@@ -266,6 +290,8 @@ Hope
 Charity
 ```
 
+<br>
+
 ### Nested Iterator
 **중첩된 반복자(nested iterator)** 는 `for` 루프에 추가된 부가적인 반복자로, 전체 반복 횟수를 자신의 반복 횟수만큼 반복한다.
 ```scala
@@ -276,6 +302,8 @@ scala> for {
      | { print(s"($x,$y) ") }
 (1,1) (1,2) (1,3) (2,1) (2,2) (2,3) 
 ```
+
+<br>
 
 ### Value Binding
 `for` 루프에서 일반적인 전략은 현행 반복을 기반으로 하는 표현식 블록 내에 임시 값 또는 변수를 정의하는 것이다. 스칼라에서 이에 대응하는 다른 방법으로는 `for` 루프 정의에서 **값 바인딩(value binding)** 을 하는 것이다. 이는 동일한 작업을 하지만, 표현식 블록의 크기와 복잡도를 최소화할 수 있다.
@@ -290,6 +318,8 @@ val powersOf2: IndexedSeq[Int] = Vector(1, 2, 4, 8, 16, 32, 64, 128, 256)
 ```
 값 `pow`는 루프에서 반복할 때마다 정의되고 할당된다. 그 값은 `for` 루프에 의해 생성되므로 결과는 각 반복마다 산출된 `pow` 값의 `collection`이다.
 
+<br>
+
 ## While과 Do/While Loop
 스칼라에서는 `while`과 `do/while` 루프를 지원하지만 보편적으로 사용하지는 않는데, 이 루프가 표현식이 아니며 값을 생성(yield)하는 데에는 사용할 수 없기 때문이다.
 
@@ -302,6 +332,8 @@ scala> var x = 10; while (x > 0) x -= 1
 var x: Int = 0
 ```
 
+<br>
+
 ### Do/While
 `do/while` 로프는 `while`과 유사하지만, 조건식을 처음 평가하기 전에 문장이 먼저 실행횐다.
 ```scala
@@ -311,24 +343,3 @@ val x: Int = 0
 scala> do println(s"Here I am, x = $x") while (x > 0)
 Here I am, x = 0
 ```
-
-<br>
-<br>
-
-## 연습문제
-#### 1. 문자열 name이 주어졌을 때 빈 문자열이 아니면 동일한 문자열을 반환하고, 그렇지 않은 경우 "n/a" 문자열을 반환하는 매치 표현식을 작성해보자.
-```scala
-:load practice_1.scala
-```
-#### 2. double 타입의 amount가 주어졌을 때 그 값이 0보다 크면 "greater"를, 0과 같은 경우 "same"을, 0보다 작은 경우 "less"를 반환하는 표현식을 작성하라. if/else 블록과 매치 표현식 둘 다 작성해보자.
-
-
-#### 3. 입력값 cyan, magenta, yellow 중 하나를 문자열 형태의 여섯 문자의 16진수로 전환하는 표현식을 작성하라. 에러 조건을 처리하기 위해 어떤 일을 할 수 있는가?
-
-
-#### 4. 1부터 100까지 숫자를 출력하되, 각 줄에 다섯 숮자씩 묶어서 출력하라.
-
-
-#### 5. 1부터 100까지의 숫자를 출력하되, 3의 배수일 경우에는 "type"을 출력하고, 5의 배수인 경우에는 "safe"를, 그리고 3과 5의 배수인 경우에는 "typesafe"를 출력하는 표현식을 작성하라.
-
-#### 6. 5번 문제의 답을 한 줄에 맞게 작성하라.

@@ -1,5 +1,7 @@
 # 그 외의 컬렉션
 
+<br>
+
 ## 가변적인 컬렉션
 `List`, `Set`, `Map`은 생성된 후 변경할 수 없다. 하지만 이들은 새로운 컬렉션으로 변형될 수 있다.
 ```scala
@@ -17,6 +19,8 @@ Map(MSFT -> 40, GOOG -> 521)
 ```
 위의 예제에서는 `m`을 생성한 뒤 `m`을 변경해 `n`에 저장하였다. 이것은 정확하게 불변의 데이터가 의미하는 바로, 코드의 안정성을 높이고 버그를 방지하기 위해 데이터와 데이터 구조는 변경되거나 자신의 상태를 바꿀 수 없다.  
 그러나 가변적인 데이터가 필요하거나 더 안전한 때가 있다. 예를 들어, 함수 내에서만 사용하는 가변적인 데이터 구조 또는 반환하기 전에 불변의 데이터로 바꿀 가변 데이터를 생성하는 것이 더 안전할 수 있다.
+
+<br>
 
 ### 새로운 가변 컬렉션 생성하기
 불변의 타입 | 가변적인 대응 타입
@@ -49,6 +53,8 @@ val l: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 유사하게, `Map`은 `toMap`, `Set`은 `toSet` 메소드를 이용하여 불변의 컬렉션으로 변환할 수 있다.
 
+<br>
+
 ## 불변의 컬렉션으로부터 가변적인 컬렉션 만들기
 `List`, `Map`, `Set` 모두 `toBuffer` 메소드를 이용하여 가변적인 타입인 `collection.mutable.Buffer` 타입으로 변환할 수 있다.
 ```scala
@@ -76,6 +82,8 @@ val s: scala.collection.immutable.Set[(String, Int)] = Set((MSFT,40), (GOOG,521)
 `Buffer` 타입은 범용적으로 사용되는 좋은 가변적인 컬렉션으로 `List`와 유사하지만, 그 내용을 추가하고, 삭제하고, 교체할 수 있다. `Buffer` 타입이 지원하는 전환 메소드는 자신에 대응하는 불변의 타입에 적용하는 `toBuffer` 메소드와 함께 가변적인 데이터로 작업하기에 유용한 메커니즘으로 만들어준다.  
 `Buffer`의 유일한 단점은 너무 광범위하게 적용될 수 있다는 것이다. 만약 루프 내에서 단지 컬렉션을 반복적으로 추가하는 것이라면 `Buffer` 대신 `Builder`를 사용하는 것이 더 낫다.
 
+<br>
+
 ### 컬렉션 빌더 사용하기
 `Builder`는 `Buffer`를 단순화한 형태로, 할당된 컬렉션 타입을 생성하고, 추가(append) 연산만을 지원하도록 제한되어 있다.  
 특정 컬렉션 타입의 빌더를 생성하려면 해당 타입의 `newBuilder` 메소드를 호출하고, 해당 타입의 컬렉션 구성 요소를 포함하면 된다. 빌더의 `result` 메소드를 호출하면 이를 최종적으로 `Set`로 변환해준다.
@@ -94,6 +102,8 @@ val res8: b.type = scala.collection.immutable.SetBuilderImpl@2d839402
 scala> val helloSet = b.result
 val helloSet: scala.collection.immutable.Set[Char] = Set(h, e, l, o)
 ```
+
+<br>
 
 ## 배열
 `Array`는 고정된 크기를 가지며, 내용을 변경할 수 있고, 인덱스를 가지고 있는 컬렉션이다. `Array` 타입은 실제로 자바의 배열 타입을 **묵시적 클래스(implicit class)** 라고 부르는 고급 특징으로 감싼 wrapper다. 묵시적 클래스는 배열을 시퀀스처럼 사용할 수 있도록 해준다.
@@ -118,6 +128,8 @@ val scala: Array[String] = Array()
 ```
 JVM 코드를 위해 필요한 경우가 아니라면 `Array` 사용을 추천하지 않는다.
 
+<br>
+
 ## Seq와 시퀀스
 `Seq`는 모든 시퀀스의 루트 타입으로, `List` 같은 연결 리스트와 `Vector` 같은 색인 리스트를 포함한다. 루트 타입으로서 `Seq`는 인스턴스화 될 수 없지만 `List`를 생성하는 빠른 방법으로 `Seq`를 호출할 수 있다.
 ```scala
@@ -125,7 +137,11 @@ scala> val inks = Seq('C', 'M', 'Y', 'K')
 val inks: Seq[Char] = List(C, M, Y, K)
 ```
 
+<br>
+
 ![sequence hierarchy](https://alvinalexander.com/sites/default/files/3-scala-sequences.png)
+
+<br>
 
 이름 | 설명
 :---: | :---
@@ -139,6 +155,8 @@ val inks: Seq[Char] = List(C, M, Y, K)
 `Stack` | 후입선출(LIFO, Last-In-First-Out) 리스트
 `Stream` | 지연(lazy) 리스트. 항목들은 그 항목에 접근할 때 추가됨
 `String` | 문자(character)의 컬렉션
+
+<br>
 
 ## LazyList
 `LazyList` 타입은 하나 또는 그 이상의 시작 요소들과 재귀 함수로 생성되는 **지연(lazy)** 컬렉션이다. 다른 불변의 컬렉션들은 그 내용의 100%를 초기화 시점에 받지만, 스트림의 구성 요소들은 최초로 접근될 때 컬렉션에 추가된다. 스크림이 생성한 구성 요소들은 나중에 추출될 때를 대비하여 캐시에 저장되어 각 요소가 한 번만 생성됨을 보장한다.  
@@ -181,6 +199,7 @@ val hexChars: List[Char] = List(A, B, C, D, E, F)
 ```
 새로운 함수 `to`를 이용하여 16진수를 쓸 때 사용되는, 문자로 구성된 한정된 `LazyList`를 생성할 수 있다. 이 `LazyList`의 `take` 연산은 가능한 요소들만 반환하고, 그 컬렉션을 종료하는 `LazyList.empty`를 위치시킨 다음 종료된다.
 
+<br>
 
 ## 모나딕 컬렉션
 **모나딕 컬렉션(monadic collection)** 은 `Iterable` 연산 같은 변형 연산을 지원하지만, 하나 이상의 요소는 포함할 수 없다.
@@ -262,6 +281,8 @@ val exactSize: Option[Int] = None
 ```
 연산은 현재 값(Some)에 적용되고 누락된 값(None)에는 적용되지 않지만, 결과 타입은 여전히 마지막 연산의 타입과 일치한다.
 
+<br>
+
 ### Option으로부터 값 추출하기
 `Option` 컬렉션은 존재 여부가 확실하지 않은 값을 저장하고 변환하는 안전한 메커니즘과 연산을 제공한다. 그리고 잠재적인 값을 추출하는 안전한 연산도 제공한다.  
 추출 연산 중 안전하지 않은 연산 `get()`의 경우 `Some` 인스턴스인 `Option`에 이 메소드를 호출하면 `Option`이 가지고 있는 값을 성공적으로 받지만 `None` 인스턴스에 호출하면 `no such element` 에러가 발생한다. `Option.get()`은 안전하지 않으며, 타입에 안전한 연산의 모든 목표를 무너뜨리고 런타임 에러를 일으킬 수 있기 때문에 피해야 한다. 가능하다면 `fold`나 `getOrElse`처럼 안전한 기본값을 정의할 수 있는 연산을 사용하자.
@@ -272,6 +293,8 @@ val exactSize: Option[Int] = None
 `getOrElse` | nextOption getOrElse 5 또는 nextOption getOrElse {println("error!"); -)} | Some의 값을 반환하거나 아니면 이름 매개변수의 결과를 반환함
 `orElse` | nextOption orElse nextOption | 실제로 값을 추출하지는 않지만 None인 경우 값을 채우려고 함. Option이 비어 있지 않으면 이 option을 반환하고 그렇지 않은 경우 주어진 이름 매개변수로부터 Option을 반환함
 `매치 표현식` | nextOption match { case Some(x) => x; case None => -1 } | 값이 있는 경우 매치 표현식을 사용하여 그 값을 처리함. Some(x) 표현식은 그 데이터를 추출하여 매치 표현식의 결과값으로 사용되거나 또 다른 변환에 재사용할 수 있는 지정된 값 x에 넣음
+
+<br>
 
 ## Try 컬렉션
 `util.Try` 컬렉션은 에러 처리를 컬렉션 관리로 바꿔 놓는다. 이 컬렉션은 주어진 함수 매개변수에서 발생한 에러를 잡아내는 메커니즘을 제공하여 함수가 성공적으로 실행된 경우에는 함수의 결과값을, 그렇지 않은 경우에는 에러를 반환한다.  
@@ -329,6 +352,8 @@ scala> val y = nextError
 val y: scala.util.Try[Int] = Success(1)
 ```
 
+<br>
+
 이름 | 예제 | 설명
 :---: | :--- | :---
 `flatMap` | nextError flatMap { _ => nextError } | Success인 경우 util.Try를 반환하는 함수를 호출함으로써 현재의 반환값을 새로운 내장된 반환값에 매핑함. nextError 함수는 입력값을 취하지 않기 때문에 현재 Success로부터 사용하지 않는 입력값을 나타내는 더스코어를 사용함
@@ -339,6 +364,8 @@ val y: scala.util.Try[Int] = Success(1)
 `map` | nextError map (_ * 2) | Success인 경우 새로운 값에 내장된 값을 매핑하는 함수를 호출함
 `매치 표현식` | nextError match { case util.Success(x) => x; case util.Failure(error) => -1 } | Success를 반환값으로 또는 Failure를 예외로 처리학 ㅣ위해 매치 표현식을 사용함. 표시되지 않는 작업: 훌륭한 로깅 프레임워크로 에러를 로깅하여 에러 통보 및 추적을 보장함
 `아무 일도 하지 않음` | nextError | 가장 쉬운 에러 처리 방식. 이 방식으로 단순히 예외가 잡히거나, 현재의 애플리케이션을 종료시킬 때까지 호출 스택을 타고 전파되도록 그대로 둠. 이 방식은 민감한 경우에 사용하면 문제가 크겠지만, 발생한 예외는 결코 무시되지 않음
+
+<br>
 
 많은 개발자들이 처리해야 할 보편적인 예외는 문자열에 저장된 숫자를 검증하는 것이다. 다음은 `orElse` 연산자를 이용하여 문자열에서 숫자를 파싱하고, 성공 시 그 결과를 출력하기 위해 `foreach` 연산을 사용한다.
 ```scala
@@ -360,6 +387,8 @@ scala> val x = result match {
      | }
 val x: Option[Int] = Some(123)
 ```
+
+<br>
 
 ## Future 컬렉션
 `concurrent.Future`는 백그라운드 작업을 개시하는 모나딕 컬렉션이다. `Option`과 `Try`와 같이 `Future`는 잠재적 값을 나타내며, 추가 연산을 연결하거나 값을 추출하는 안전한 연산을 제공한다. `Option`과 `Try`와는 달리 퓨처의 값은 즉시 사용하지 못할 수도 있는데, 퓨처를 생성할 때 싲가한 백그라운드 작업이 여전히 작업 중일 수도 있기 때문이다.
@@ -411,6 +440,8 @@ scala> def nextFtr(i: Int = 0) = Future {
 def nextFtr(i: Int): scala.concurrent.Future[Int]
 ```
 
+<br>
+
 이름 | 예제 | 설명
 :---: | :--- | :---
 `fallbackTo` | nextFtr(1) fallbackTo nextFtr(2) | 두 번째 Future를 첫 번째에 연결하고 새로운 종합적인 Future를 반환함. 첫 번째 Future가 성공적이지 않다면 두 번째가 호출됨
@@ -418,6 +449,8 @@ def nextFtr(i: Int): scala.concurrent.Future[Int]
 `map` | nextFtr(1) map (_ * 2) | 주어진 함수를 Future에 연결하고 새로운 종함적인 Future를 반환함. Future가 성공적이라면 그 반환값이 해당 함수를 호출할 때 사용됨
 `onComplete` | nextFtr() onComplete { _ getOrElse 0 } | Future의 작업이 완료된 후 주어진 함수가 값 또는 예외를 포함한 util.Try를 이용하여 호출됨
 `Future.sequence` | concurrent.Future sequence List(nextFtr(1), nextFtr(5)) | 주어진 시퀀스에서 Future를 병행으로 실행하여 새로운 Future를 반환함. 시퀀스 내의 모든 Future가 성공하면 이들의 반환값의 리스트가 반환됨. 그렇지 않으면 그 시퀀스 내에서 처음으로 발생한 예외가 반환됨.
+
+<br>
 
 Future가 유용하게 사용되려면 생성, 관리 외에도 추출이 가능해야 한다. Future의 좀 더 현실적인 예제를 통해 Future로 작업하는 방법을 처음부터 끝까지 알아보자.  
 아래의 예제에서는 URL로부터 내용을 읽어오기 위해 스칼라 라이브러리 연산인 `io.Source.fromURL(url: String)`를 사용하는데, 이는 `+io.Source` 인스턴스를 반환한다.  
@@ -445,5 +478,3 @@ scala> val cityTemps = Future sequence Seq(
      | )
 val cityTemps: scala.concurrent.Future[Seq[Double]] = Future(<not completed>)
 ```
-
-Future는 아직 이해도 안되고 너무 어려우니 나중에 알아보자.
