@@ -1,9 +1,6 @@
 # Today I Learned
 > Archive of Endless Learning
 
-
-<br>
-
 ## Table of Contents
 
 ### Scala
