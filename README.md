@@ -5,7 +5,7 @@
 
 ### Scala
 
-* \*\*\*\*[**Scala 101**](https://github.com/80rian/TIL/tree/91286f5df42e96a220e8273bd299337bfad24f3f/SCALA/SCALA101/README.md)\*\*\*\*
+* [**Scala 101**](https://github.com/80rian/TIL/tree/91286f5df42e96a220e8273bd299337bfad24f3f/SCALA/SCALA101/README.md)
   * [Working with Data](scala/scala101/01_working_with_data.md)
   * [Expressions and Conditionals](scala/scala101/02_expressions_and_conditionals.md)
   * [Functions](scala/scala101/03_functions.md)
