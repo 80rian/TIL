@@ -2,4 +2,4 @@ in_progress
 __pycache__
 .DS_Store
 .vscode
-.metal
+.metals
